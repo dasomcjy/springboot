@@ -38,7 +38,7 @@ JPA 사용을 위한 환경 구성
 		-- Question.java 	: 부모 
 		-- Answer.java 		: 자식 
 
-JPA는 DB의 테이블 컬럼이 수정, 생성, 삭제가 빈번하게 발생시 유지 보수를 아주 쉽게 할 수 있다. 
+	JPA는 DB의 테이블 컬럼이 수정, 생성, 삭제가 빈번하게 발생시 유지 보수를 아주 쉽게 할 수 있다. 
 	- JPA를 사용하지 않는 경우 DB의 테이블이 수정 발생시 dto, dao (insert, update, delete, get, getList)
 	- 단점 : 테이블이 복잡한 조인으로 연결된 경우나, 복잡한 계산을 처리하는 환경에서는 적합하지 않다. 
 				( MyBatis : 유지보수도 쉽게하고 , 복잡한 계산처리도 가능 ) 
@@ -48,6 +48,28 @@ JPA는 DB의 테이블 컬럼이 수정, 생성, 삭제가 빈번하게 발생�
 	- JPA를 사용해서 DB를 CRUD 하려면 Repository 인터페이스를 생성해야 한다.
 	- JpaRepository를 상속해서 만들어야 한다. 
 		
+		
+		
+		
+	실습 sbb2 프로젝트에서 진행하세요. H2 DataBase를 사용하세요.
+	JPA Entity 클래스 실습, JPA 메소를 사용해서 CRUD , save() , findAll(),
+	
+	아래 내용의 JPA Entity 클래스를 생성 하세요.
+	테이블명 : user
+		idx		primary key, 자동증가(1,1)
+		name 	varchar(100)
+		pass	varchar(100)
+		email	varchar(200)
+		regdate LocalDateTime
+		cnt 	int
+		
+	
+	-- 임의의 값을 5개 insert
+	-- 넣은 값을 regdate 컬럼을 기준으로 내림차순 (Desc) 정렬
+	-- idx 3번의 name과 email 주소를 수정
+	-- idx 4번의 값을 삭제
+	
+				
 		
 		
 		  			

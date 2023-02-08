@@ -13,8 +13,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-
+@ToString
 @Getter
 @Setter
 @Entity		// 자바클래스를 DataBase의 테이블과 매핑된 클래스 : 테이블명 : question
@@ -32,11 +33,12 @@ public class Question {
 	
 	private LocalDateTime createDate;		//create_date : 이렇게 바뀜 ! 낙타케이스
 
+	
 	/*
 	@Column(length = 300)
 	private String addr ;
 	*/ 
-	
+
 	//Question 테이블에서 Answer 테이블을 참조하는 컬럼을 생성 @OnetoMany
 	@OneToMany (mappedBy = "question" , cascade = CascadeType.REMOVE)
 	private List<Answer> answerList; 

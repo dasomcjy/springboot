@@ -12,8 +12,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor		// 객체 생성시 모든 필드의 값을 입력받아 필드의 초기값을 할당 
 public class HelloLombok3 {
-	
-	
+
 	private String hello;			//필드 : private
 	private int lombok;				//필드 
 	
