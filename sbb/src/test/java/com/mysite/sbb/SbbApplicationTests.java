@@ -10,6 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.mysite.sbb.answer.Answer;
+import com.mysite.sbb.answer.AnswerRepository;
+import com.mysite.sbb.question.Question;
+import com.mysite.sbb.question.QuestionRepository;
+
+import jakarta.transaction.Transactional;
+
 @SpringBootTest
 class SbbApplicationTests {
 
@@ -20,8 +27,66 @@ class SbbApplicationTests {
 	@Autowired	//객체 자동 주입 (DI) , JPA의 메소드를 사용, findAll() , findById() , save() , delete()	
 	private AnswerRepository answerRepository;
 	
+	/* 하나의 질문에 여러개의 답변 찾기 */
 	
-	/* Answer 테이블 Insert 처리 */
+	@Transactional		// 아래의 메소드가 하나의 트랜잭션으로 작동되도록 설정 (Test 에서만 사용)
+	@Test
+	public void testjap8() {
+		// 1. Question 테이블에서 질문의 레코드를 얻어온다. 끄집어 낸다.
+		Optional <Question> op = 
+					this.questionRepository.findById(3);
+		
+		Question q = null ; 
+		if (op.isPresent()) {
+			q = op.get();
+		}
+		
+		System.out.println(q.getId());
+		System.out.println(q.getSubject());
+		
+		
+		// 2. 끄집어낸 객체의 q.getAnswerList();  <== 끄집어낸 객체 답변글을 얻어온다.
+		// Question 객체의 AnswerList 컬럼은 List<answer> 
+		List<Answer> all =
+				q.getAnswerList();
+		
+		
+		// 3. 출력 구문에서 출력 한다. 
+		
+		for (int i = 0 ; i < all.size(); i++) {
+			Answer a = all.get(i);
+			System.out.println(a.getId());
+			System.out.println(a.getContent());
+			System.out.println(a.getCreateDate());
+			System.out.println("==========================");
+		}
+	}
+	
+	
+	
+	
+	/* 답변 레코드 하나 가져오기
+	
+	@Test
+	public void testjpa7() {
+		
+		Optional <Answer> op = 
+		this.answerRepository.findById(2);
+		
+		if (op.isPresent()) {	//isPresent() : null (false) , null이 아닐때 (true) 
+			Answer a = op.get(); 
+			System.out.println(a.getId());
+			System.out.println(a.getContent());
+			System.out.println(a.getCreateDate());
+			//System.out.println(a.getQuestion());
+			
+		}
+		
+		System.out.println();
+	}
+	
+	 */
+	/* Answer 테이블 Insert 처리 
 	@Test
 	public void testAnswerjpa() {
 		// 1. Question (부모) 테이블의 답변을 처리할 레코드를 먼저 select 한다. findById(1)
@@ -41,7 +106,7 @@ class SbbApplicationTests {
 		
 	}
 	
-	
+	*/
 	
 	
 	
@@ -71,6 +136,8 @@ class SbbApplicationTests {
 	
 	/* 데이터 수정 : save() */
 	
+	/*
+	
 	@Test
 	public void testjpa5() {
 		// 1. 수정할 객체를 findById() 메소드를 사용해서 가지고 온다.
@@ -87,7 +154,7 @@ class SbbApplicationTests {
 		
 	}
 	
-	
+	*/
 	
 	/* 테이블의 모든 레코드 정렬 : asc, desc 
 	@Test
