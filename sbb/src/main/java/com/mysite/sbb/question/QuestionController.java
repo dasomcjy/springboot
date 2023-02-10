@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,9 +15,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor	// final필드의 생성자를 자동으로 만들어서 생성자를 통한 의존성 주입
 @Controller				// 
 public class QuestionController {
-		
-		
-		/* 
+
+	    /* 
 		 	클래스를 객체로 생성 어노테이션 ( 빈(객체) 등록 , Spring Framework)  
 		 	@Component : 일반적인 클래스를 객체화 
 		 	@Controller : 클라이언트 요청을 받아서 처리 , Controller
@@ -42,9 +42,9 @@ public class QuestionController {
 		 */
 	
 	//생성자를 통한 의존성 주입 <== 권장하는 방식
-
-	private final QuestionRepository questionrepository;
-	
+		//Controller에서 직접 Repository를 접근하지 않고 Service를 접근하도록 
+	//private final QuestionRepository questionrepository;
+	private final QuestionService qustionService;
 	
 	@GetMapping("/question/list")		//http://localhost:8181/question/list
 	@PostMapping("/question/list")		//Form 태그의 method=post action = "/question/list"
@@ -54,8 +54,10 @@ public class QuestionController {
 		
 		// 2. 비즈니스 로직을 처리
 		List<Question> questionList = 
-				this.questionrepository.findAll();
+				//this.questionrepository.findAll();
+				this.qustionService.getList();
 		
+				
 		// 3. 뷰(view) 페이지로 전송 
 			//Model : 뷰페이지로 서버에 데이터를 담아서 전송 객체 ( Session, Application )
 		
@@ -65,5 +67,22 @@ public class QuestionController {
 		
 	}
 	
-
+	// 상세 페이지를 처리하는 메소드 :  /question/detail/1
+	
+	@GetMapping(value = "/question/detail/{id}")
+	public String detail (Model model , @PathVariable("id") Integer id) {
+			
+		// 서비스 클래스의 메소드 호출 : 상세페이지 보여달라
+		Question q = 
+				this.qustionService.getQuestion(id);
+		
+		// Model 객체에 담아서 클라이언트에게 전송 
+		model.addAttribute("question" , q );
+		
+		return "question_detail";    // template : question_detail.html
+		
+	}
+	
+	
+	
 }
