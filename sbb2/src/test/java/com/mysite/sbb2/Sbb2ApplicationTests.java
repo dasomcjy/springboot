@@ -20,6 +20,26 @@ class Sbb2ApplicationTests {
 	private UsersRepository usersRepository;
 	
 	/*
+	@Test 
+	public void insert1000() {
+		Users q = null; 
+		
+		//for 문을 사용해서 레코드 1000 개 insert 
+		for ( int i = 1 ; i <= 1000; i++) {
+			q = new Users();
+			q.setName("이름 - " + i);
+			q.setPass("pass1");
+			q.setEmail("메일주소 - " + i);
+			q.setRegdate(LocalDateTime.now());
+			q.setCnt(i);
+			
+			this.usersRepository.save(q); 	
+		}		
+	}
+	
+	*/
+	
+	/*
 	@Test
 	public void testjpa5() {
 		// 1. 수정할 객체를 findById() 메소드를 사용해서 가지고 온다.

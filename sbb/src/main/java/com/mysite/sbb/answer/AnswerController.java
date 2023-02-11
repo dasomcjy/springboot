@@ -17,23 +17,23 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class AnswerController {
 	
-	
 	private final QuestionService questionService;
-	private final AnswerRepository answerService;
+	private final AnswerService answerService; 
 	
-	//http://localhost:8181/answer/create/1 요청에 대한 답변글 등록 처리
+	//http://localhost:9292/answer/create/1 요청에 대한 답변글 등록 처리 
 	
 	@PostMapping("/create/{id}")
-	public String createAnswer(Model model, @PathVariable("id") Integer id, 
-			@RequestParam String content) {
+	public String createAnswer(Model model, @PathVariable("id") Integer id,
+			@RequestParam String content ) {
 		
-		Question question = this.questionService.getQuestion(id);
-		//답변 내용을 저장하는 메소드 호출 (Service에서 호출)
+		Question question = this.questionService.getQuestion(id); 
+		//답변 내용을 저장하는 메소드 호출 (Service에서 호출) 
 		
-		//this.answerService.create(question, content);
 		
-		return String.format("redirect:/question/detail/%s", id);
+		this.answerService.create(question, content); 
 		
+		
+		return String.format("redirect:/question/detail/%s", id); 
 	}
 
 }
