@@ -1,77 +1,30 @@
+
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
 <meta charset="UTF-8">
-
-<title>사용자 목록 출력</title>
-
-<style>
-
-tr, td {
-
-border-bottom: 1px solid gray;
-
-text-align: center;
-
-}
-
-</style>
-
+<title>Insert title here</title>
 </head>
-
 <body>
-
-<center>
-
-<table>
-
-<tr>
-
-<td>가입번호</td>
-
-<td>이름</td>
-
-<td>비밀번호</td>
-
-<td>이메일</td>
-
-<td>가입날짜</td>
-
-<td>로그인횟수</td>
-
-
-</tr>
-
-
-
-
-
-<tr th:each="users:${usersList}">
-
-
-<td>[[${users.idx}]]</td>
-
-<td>[[${users.name}]]</td>
-
-<td>[[${users.pass}]]</td>
-
-<td>[[${users.email}]]</td>
-
-<td>[[${users.regdate}]]</td>
-
-<td>[[${users.cnt}]]</td>
-
-</tr>
-
-</table>
-
-
-</center>
-
+	<center>
+		<h1>유저 리스트 출력</h1>
+		<hr>
+		<a href="/user_insert" >회원등록</a>
+		<hr>
+		<table>
+			<tr>
+				<th>이름</th><th>이메일</th><th>등록날자</th>
+			</tr>
+			
+			<tr th:each = "userL:${userList}">
+				<td><a th:href="|/user_detail/${userL.idx}|"  th:text="${userL.name}"></a></td>
+				<td th:text="${userL.email}"></td>
+				<td th:text="${userL.regdate}"></td>
+			</tr>
+			
+		</table>
+	</center>
+	
 </body>
-
 </html>
 

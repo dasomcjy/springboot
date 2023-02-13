@@ -159,5 +159,23 @@ JPA 사용을 위한 환경 구성
 		  sbb2프로젝트 폴더 압출 : 조명_이름.zip
 		  업로두 URL : https://url.kr/u86s1c
 		   		 
+		   		 
+==============================================================================
+
+
+// Spring Framework을 사용한 폼 태그 내의 유효성 검사
+
+1. 라이브러리 등록 : 
+	build.gradle 에 등록
+			//Spring 에서 제공해주는 유효성 검사 라이브러리 : form에서 빈값이나 글자수 제한
+			   implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+2. 유효성 검사 클래스를 생성 (QuestionForm.java) , @NotEmpty (message="오류메세지") 
+	@Getter 
+	@Setter 
+	
+	유효성 검사 필드 : subject, content 			   	   		 
+		  
+		  
 		  
 			

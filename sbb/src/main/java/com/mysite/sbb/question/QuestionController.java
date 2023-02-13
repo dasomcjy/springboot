@@ -5,11 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mysite.sbb.answer.AnswerForm;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor	// final필드의 생성자를 자동으로 만들어서 생성자를 통한 의존성 주입
@@ -44,7 +50,7 @@ public class QuestionController {
 	//생성자를 통한 의존성 주입 <== 권장하는 방식
 		//Controller에서 직접 Repository를 접근하지 않고 Service를 접근하도록 
 	//private final QuestionRepository questionrepository;
-	private final QuestionService qustionService;
+	private final QuestionService questionService;
 	
 	@GetMapping("/question/list")		//http://localhost:8181/question/list
 	@PostMapping("/question/list")		//Form 태그의 method=post action = "/question/list"
@@ -55,7 +61,7 @@ public class QuestionController {
 		// 2. 비즈니스 로직을 처리
 		List<Question> questionList = 
 				//this.questionrepository.findAll();
-				this.qustionService.getList();
+				this.questionService.getList();
 		
 				
 		// 3. 뷰(view) 페이지로 전송 
@@ -70,11 +76,11 @@ public class QuestionController {
 	// 상세 페이지를 처리하는 메소드 :  /question/detail/1
 	
 	@GetMapping(value = "/question/detail/{id}")
-	public String detail (Model model , @PathVariable("id") Integer id) {
+	public String detail (Model model , @PathVariable("id") Integer id , AnswerForm answerform) {
 			
 		// 서비스 클래스의 메소드 호출 : 상세페이지 보여달라
 		Question q = 
-				this.qustionService.getQuestion(id);
+				this.questionService.getQuestion(id);
 		
 		// Model 객체에 담아서 클라이언트에게 전송 
 		model.addAttribute("question" , q );
@@ -83,6 +89,32 @@ public class QuestionController {
 		
 	}
 	
+	@GetMapping("/question/create")
+	public String questionCreate(QuestionForm questionForm) {
+		return "question_form";
+	}
+	
+	@PostMapping("/question/create")
+	public String questionCreate(
+				//@RequestParam String subject, @RequestParam String content
+				@Valid QuestionForm questionForm, BindingResult bindingResult) 
+				{
+		
+					if (bindingResult.hasErrors()) {		//subject, content 가 비어있을때
+						return "question_form";
+					}
+		
+		//로직 작성부분 ( Service에서 로직을 만들어서 작동 ) 
+		//this.qustionService.create(subject, content);
+		
+			//this.questionService.create(questionForm.getSubject(), questionForm.getContent());
+		
+			
+	this.questionService.create(questionForm.getSubject(), questionForm.getContent());
+		//값을 DB에 저장후 List페이지로 리다이렉트 (질문 목록으로 이동)
+		return "redirect:/question/list";
+		
+	}
 	
 	
 }
