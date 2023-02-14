@@ -1,30 +1,65 @@
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<center>
-		<h1>유저 리스트 출력</h1>
-		<hr>
-		<a href="/user_insert" >회원등록</a>
-		<hr>
-		<table>
+<html layout:decorate="~{layout}">
+
+ <div layout:fragment="content" class="container my-3">
+	<table class ="table">
+		<thead class = "table-dark">	<!--  제목을 처리 -->
+		
 			<tr>
-				<th>이름</th><th>이메일</th><th>등록날자</th>
+				<th>번호</th><th>이메일</th><th>등록날짜</th>
 			</tr>
-			
-			<tr th:each = "userL:${userList}">
-				<td><a th:href="|/user_detail/${userL.idx}|"  th:text="${userL.name}"></a></td>
-				<td th:text="${userL.email}"></td>
-				<td th:text="${userL.regdate}"></td>
-			</tr>
-			
+		</thead> 
+
+		<tbody>
+
+		<tr th:each="users, loop : ${paging}">
+		
+			<td th:text="${paging.getTotalElements -(paging.number*paging.size)-loop.index}">  번호  </td>
+			 
+		 	<td> <a th:href="@{|/users/detail/${users.idx}|}"> [[${users.email}]] </a> </td>
+		 	
+		 	<td> [[ ${#temporals.format(users.regdate, 'yyyy-MM-dd HH:mm')}]] </td>
+		 </tr>
+		 </tbody>
 		</table>
-	</center>
 	
+ 		<div th:if="${!paging.isEmpty()}">
+	 	<ul class="pagination justify-content-center">
+	 	
+	 		<!-- 이전페이지가 존재하지 않으면 이전에 링크를 비활성화 -->
+	 		<li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+	 		
+	 			<!-- paging.number : 현재페이지  -->
+	 			<a class="page-link" th:href="@{|?page=${paging.number-1}|}">
+	 			이전 </a>
+	 		
+	 		</li>
+	 		
+	 		<!-- 첫페이지 부터 마지막 페이지까지 루프를 돌려서 출력 -->
+	 		<li th:each="page : ${#numbers.sequence(0,paging.totalPages-1)}"
+	 			th:if="${page >= paging.number-5 and page <= paging.number+5}"
+	 			th:classappend="${page==paging.number} ? 'active'"	class="page-item"
+	 		>
+	 			<a th:text=${page} class="page-link" th:href="@{|?page=${page}|}"></a>
+	 		</li>
+	 		
+	 		<!-- 다음을 처리하는 블락 -->
+	 		<li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+				<a class="page-link" th:href="@{|?page=${paging.number+1}|}">	 		
+	 				다음
+	 			</a>
+	 		</li>
+	 	</ul>
+	 </div>
+	
+	 <!--  페이징 처리 끝 -->
+		 
+	 <!-- 새글 등록 버튼 -->
+
+	 	 <a th:href="@{/users/insert}" class="btn btn-primary"> 회원 등록하기 </a>
+	 
+	 </div>
+
 </body>
 </html>
 
