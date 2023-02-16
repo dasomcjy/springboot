@@ -3,6 +3,7 @@ package com.mysite.sbb.answer;
 import java.time.LocalDateTime;
 
 import com.mysite.sbb.question.Question;
+import com.mysite.sbb.user.SiteUser;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,5 +35,11 @@ public class Answer {
 	
 	
 	
+	//2월 16일 Entity 컬럼추가 , 글작성자 ,
+	//여려개의 질문이 한 명의 사용자에게 작성될 수 있으므로 @ManyToOne 관계가 성립한다.
 	
+	@ManyToOne					//foreign key , SiteUser를 참조해서 값을 넣는다.
+	private SiteUser author;
+	
+	private LocalDateTime modifyDate;
 }
