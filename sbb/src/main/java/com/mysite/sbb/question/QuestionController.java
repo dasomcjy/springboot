@@ -180,6 +180,10 @@ public class QuestionController {
 	 return "redirect:/";
 	 }
 	 
+	 //id : Question 객체
+	 //principal : 현재 투표하는 객체를 가지고 온다.
+	 
+	 //2월 17일 : 질문에서 추천 기능 추가
 	 @PreAuthorize("isAuthenticated()")
 	 @GetMapping("/question/vote/{id}")
 	 public String questionVote(Principal principal, @PathVariable("id") Integer id) {
@@ -190,5 +194,5 @@ public class QuestionController {
 	 }
 	 
 	 
-	 
+	 //2월 17일 : 답변에서 추천 기능 추가
 }

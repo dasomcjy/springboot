@@ -104,6 +104,7 @@ public class QuestionService {
 		
 	}
 	
+	//2월 16일 글 수정 학목 추가됨
 	 public void modify(Question question, String subject, String content) {
 		 question.setSubject(subject);
 		 question.setContent(content);
@@ -111,11 +112,12 @@ public class QuestionService {
 		 this.questionRepository.save(question);
 		 }
 	 
+	 //2월 16일 : 질문 삭제 기능 추가
 	 public void delete(Question question) {
 		 this.questionRepository.delete(question);
 		 }
 	 
-	 
+	 //2월 17일 : 추천 기능 추가
 	 public void vote(Question question, SiteUser siteUser) {
 		 question.getVoter().add(siteUser);
 		 this.questionRepository.save(question);
