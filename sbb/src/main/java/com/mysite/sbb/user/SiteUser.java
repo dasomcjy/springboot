@@ -22,6 +22,5 @@ public class SiteUser {
 	
 	private String password;
 	
-	
 	private String email;
 }
