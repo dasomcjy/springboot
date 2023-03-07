@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/layout1}">
+      
+<body>
+ <div layout:fragment="content">
+  <main>
+    <div class = "submaintitle">
+      감상나누기
+    </div>
+    <div class="write">
+      <table>
+        <tr>
+          <td class = wrtitle>책제목</td>
+          <td><input class = "write1" type ="text"  placeholder ="책제목을 입력해주세요"></td>
+        </tr>
+        <tr>
+          <td class = wrtitle>사진 첨부</td>
+          <td><input type = 'file'></td>
+        </tr>
+        <tr>
+          <td class = wrtitle>감상적기</td>
+          <td><p><textarea class = "write3 cols="50" placeholder = "함께 나누고 싶은 감상을 입력해주세요!"rows="10"></textarea></p></td>
+        </tr>
+        <tr>
+          <td class = "write4" colspan="2"><a href = ""> 글올리기 </a> </td>
+        </tr>
+      </table>
+    </div>
+  </main>
+</body>
+</html>

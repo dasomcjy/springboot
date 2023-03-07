@@ -22,3 +22,12 @@ client ===> nginx (80) ==> was (Tomcat 9898) ==> DB (docker MySQL : 3306 )
 	create user user1@'%' identified by '1324';
 	--DataBase 생성
 	create database testDB;
+	
+	
+	
+	
+	
+	
+	
+	웹 브라우져에서 출력되는 이미지 파일 형식 : 
+		*.jpg , *.jpeg , *.png, *.bmp	
