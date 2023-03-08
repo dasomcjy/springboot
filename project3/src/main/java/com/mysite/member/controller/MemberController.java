@@ -27,16 +27,17 @@ public class MemberController {
 	
 	
 	@GetMapping("/join")
-	public String inroll( MemberFormDto memberFormDto ) {
+	public String join( MemberFormDto memberFormDto ) {
 		return "join";
 	}
 	
 	@PostMapping("/join")
-	public String inroll(Model model, @Valid MemberFormDto memberFormDto,BindingResult bindingResult) {
+	public String join(Model model, @Valid MemberFormDto memberFormDto,BindingResult bindingResult) {
 		
 		if(bindingResult.hasErrors()) {
 			return "join";
 		}
+			
 		
 		if(!memberFormDto.getMPassword().equals(memberFormDto.getMPasswordConf())) {
 			bindingResult.rejectValue("mPasswordConf", "notSamePass","비밀번호가 일치하지 않습니다.");

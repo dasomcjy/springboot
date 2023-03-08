@@ -34,11 +34,19 @@ public class MemberService implements UserDetailsService{
 		member.setMName(memberFormDto.getMName());
 		member.setMPassword(this.passwordEncoder.encode(memberFormDto.getMPassword()));
 		member.setEmail(memberFormDto.getEmail());
-		member.setAddr(memberFormDto.getAddr());
 		
 		this.memberRepository.save(member);
 		
 	}
+	
+    private void validateDuplicateMember(Member member){
+        Member findMember = memberRepository.getByMName(member.getMName());
+        if(findMember != null){
+            throw new IllegalStateException("이미 가입된 회원입니다.");
+        }
+    }
+
+	
 	
 	@Override
 public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

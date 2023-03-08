@@ -1,6 +1,9 @@
 package com.mysite.member;
 
- // import com.mysite.board.Board;
+ import org.springframework.security.crypto.password.PasswordEncoder;
+
+
+// import com.mysite.board.Board;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +33,6 @@ public class Member {
 	@Email
 	private String email;
 	
-	private String addr;
+	
 	
 }

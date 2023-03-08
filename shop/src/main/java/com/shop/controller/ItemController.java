@@ -49,7 +49,12 @@ public class ItemController {
             model.addAttribute("errorMessage", "첫번째 상품 이미지는 필수 입력 값 입니다.");
             return "item/itemForm";
         }
-
+        
+        
+        
+        
+        // itemService 에서 File 객체를 사용해서 파일을 저장시 예외처리가 필수인데 throws로 미루었기 때문에 
+        // Controller에서 throws로 미룬 예외 처리를 한다. 
         try {
             itemService.saveItem(itemFormDto, itemImgFileList);
         } catch (Exception e){
@@ -75,6 +80,7 @@ public class ItemController {
         return "item/itemForm";
     }
 
+    //제품 수정
     @PostMapping(value = "/admin/item/{itemId}")
     public String itemUpdate(@Valid ItemFormDto itemFormDto, BindingResult bindingResult,
                              @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList, Model model){

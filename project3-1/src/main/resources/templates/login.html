@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/layout1}">
+     
+<body>
+ <div layout:fragment="content">
+  <main>
+    <div class = subjoin>
+      <div class = "jointitle"> 로그인 </div>
+      
+      <form th:action="@{/member/login}" method="post" >
+      <table>
+        <tr>
+          <td class = "title">닉네임</td>
+          <td> <input type ="text" name="username"></td>
+        </tr>
+        <tr>
+          <td class = "title">pw</td>
+          <td><input type ="password"  name="password"></td>
+        </tr>
+        <tr>
+		<td align="center" colspan=2><button type="submit">로그인</button></td>
+		</tr>
+      </table>
+      </form>
+      </div>
+  </main>
+</div>
+</body>
+</html>

@@ -18,8 +18,16 @@
           <td><input type ="text"  th:field="*{email}" ></td>
         </tr>
         <tr>
+          <td></td>
+          <td th:if = "${#fields.hasErrors('email')}" th:erros="*{email}">Incorrect data</td>
+        </tr>
+        <tr>
           <td class = "title">닉네임</td>
           <td> <input type ="text"   th:field="*{mName}"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td th:if = "${#fields.hasErrors('mName')}" th:erros="*{mName}">Incorrect data</td>
         </tr>
         <tr>
           <td class = "title">pw</td>
@@ -30,8 +38,8 @@
           <td><input type ="password"   th:field="*{mPasswordConf}" ></td>
         </tr>
         <tr>
-          <td class = "title">주소</td>
-          <td><input type ="text"  th:field="*{addr}" ></td>
+          <td></td>
+          <td th:if = "${#fields.hasErrors('email')}" th:erros="*{email}">Incorrect data</td>
         </tr>
       </table>
             <div class = "joinbtn">
@@ -41,5 +49,8 @@
       </div>
   </main>
 </div>
+
 </body>
+
 </html>
+

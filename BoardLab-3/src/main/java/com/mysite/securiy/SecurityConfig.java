@@ -23,7 +23,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests().requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
 		
 		.and()
-			.csrf()
+			.csrf()                    
 			.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))
 		.and()
 			.headers()

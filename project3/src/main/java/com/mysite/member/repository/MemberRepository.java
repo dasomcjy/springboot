@@ -9,5 +9,9 @@ import com.mysite.member.Member;
 public interface MemberRepository extends JpaRepository<Member, Integer> {
 	
 	Optional<Member> findByEmail(String email);
+
+	Member getByMName(String mName);
+	
+	
 	
 }

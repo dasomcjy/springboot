@@ -16,18 +16,22 @@ import javax.persistence.EntityNotFoundException;
 public class ItemImgService {
 
     @Value("${itemImgLocation}")
-    private String itemImgLocation;
+    private String itemImgLocation; //itemImgLocation=C:/shop/item 
 
     private final ItemImgRepository itemImgRepository;
 
     private final FileService fileService;
+    
+    
 
     public void saveItemImg(ItemImg itemImg, MultipartFile itemImgFile) throws Exception{
-        String oriImgName = itemImgFile.getOriginalFilename();
-        String imgName = "";
-        String imgUrl = "";
+       
+    	// oriImgName : MultipartFile에서 넘어오는 원본이미지 이름을 
+    	String oriImgName = itemImgFile.getOriginalFilename();	// 원본 이미지 파일
+        String imgName = "";									// 서버에 저장할 이미지 이름
+        String imgUrl = "";										// 전체 이미지의 URL
 
-        //파일 업로드
+        // 파일 업로드 
         if(!StringUtils.isEmpty(oriImgName)){
             imgName = fileService.uploadFile(itemImgLocation, oriImgName,
                     itemImgFile.getBytes());
