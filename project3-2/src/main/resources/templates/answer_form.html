@@ -1,5 +1,10 @@
-<html layout:decorate="~{layout}">
-<div layout:fragment="content" class="container">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/layout1}">
+
+<div layout:fragment="content">
+<body>
  <h5 class="my-3 border-bottom pb-2">답변 수정</h5>
  
  <!--  form에서 action이 빠져 있음. URL에서 URI를 action으로 처리해서 controller를 호출하게됨 
@@ -19,5 +24,6 @@
  </div>
  <input type="submit" value="저장하기" class="btn btn-primary my-2">
  </form>
+ </body>
 </div>
 </html>

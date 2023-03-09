@@ -10,7 +10,7 @@
 		<div class="card-body">
 		
 		<!-- 2월 17일 : 질문 기능에 마커 기능 추가 -->
-		<div class="card-text" th:utext="${question.content}"></div>
+		<div class="card-text" th:text="${question.content}"></div>
 		
 			<!-- 마커 기능 사용으로 주석 처리됨 
 			<div class="card-text" style="white-space: pre-line;"
@@ -31,13 +31,10 @@
 				<!-- 2월 16일 부분 수정 : 작성자 추가 -->
 					<div class="mb-2">
                    		 <span th:if="${question.author != null}" th:text="${question.author.username}"></span>
-                		 <span th:if="${question.author != null}" th:text="${question.author.email}"></span>
                 	</div>
 				
-				
-					<div
-						th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}
-"></div>
+					<div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+					
 				</div>
 			</div>
 			
@@ -58,7 +55,7 @@
                 th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
                 th:text="수정"></a>   
                 
-                <a href="javascript:void(0);" th:data-uri="@{|/question/delete/${question.id}|}"
+                <a th:href="@{|/question/delete/${question.id}|}" 
                 class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
                 th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
                 th:text="삭제"></a>
@@ -82,7 +79,7 @@
 		<div class="card-body">
 		
 			<!-- 2월 17일 답변에 마커기능 추가됨  -->
-			<div class="card-text" th:utext="${answer.content}"></div>
+			<div class="card-text" th:text="${answer.content}"></div>
 		
 			<!-- 마커 기능으로 주석 처리됨  
 			<div class="card-text" style="white-space: pre-line;"
@@ -137,12 +134,10 @@
 	</div>
 	<!-- 답변 반복 끝 -->
 	<!-- 답변 작성 -->
-	<form th:action="@{|/answer/create/${question.id}|}"  th:object="${answerForm}" method="post"
-		class="my-3">
-		
-		<!-- 외부 파일에서 import  -->
+	<form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
+		<!-- 외부 파일에서 import  
 		<div th:replace="~{form_errors::formErrorsFragment}"></div>
-		
+		-->
 		
 		<!--  내부 파일 
 		<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
@@ -154,8 +149,8 @@
 		 -->
 		 
 		 <!-- 2월 16일 답변글 작성시 login후 답변글이 남아 있도록 설정 , logout 시 답변글을 못 사용하도록 설정 -->
-		<textarea sec:authorize="isAnonymous()" disabled th:field="*{content}" class="form-control" rows="10"> </textarea>
-        <textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="10"></textarea>
+	
+        <textarea class="form-control" name = "content" ></textarea>
 		
 		<input type="submit" value="답변등록" class="btn btn-primary my-2">
 	</form>
@@ -165,15 +160,6 @@
 <!-- 2월 16일 JavaScript 추가 블락 -->
 
 <script layout:fragment="script" type='text/javascript'>
-const delete_elements = document.getElementsByClassName("delete");
-Array.from(delete_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        if(confirm("정말로 삭제하시겠습니까?")) {
-            location.href = this.dataset.uri;
-        };
-    });
-});
-
 
 const recommend_elements = document.getElementsByClassName("recommend");
 Array.from(recommend_elements).forEach(function(element) {

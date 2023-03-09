@@ -13,25 +13,25 @@ public class MainController {
 		return "index";
 	}
 	
-//	@GetMapping("/sub1")
-//	public String sub1() {
-//			
-//			return "sub1";
-//			
-//		}
-//	
-//	@GetMapping("/sub2")
-//	public String sub2() {
-//			
-//			return "sub2";
-//		
-//	}
-//	
-//	@GetMapping("/sub3")
-//	public String sub3() {
-//			
-//			return "sub3";
-//	}
+	@GetMapping("/sub1")
+	public String sub1() {
+			
+			return "sub1";
+			
+		}
+	
+	@GetMapping("/sub2")
+	public String sub2() {
+			
+			return "sub2";
+		
+	}
+	
+	@GetMapping("/sub3")
+	public String sub3() {
+			
+			return "sub3";
+	}
 	
 //	@GetMapping("/sub4")
 //	public String sub4() {
