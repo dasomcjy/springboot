@@ -3,11 +3,16 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/layout1}">
 
-<div layout:fragment="content" class="container my-3">
+<div layout:fragment="content" >
 	<!-- 질문 -->
+	<main>
+    <div class = "submaintitle">
+      <a href = "/sub4">자유게시판</a>
+    </div>
+    <div class="container my-3">
 	<h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
 	<div class="card my-3">
-		<div class="card-body">
+	<div class="card-body">
 		
 		<!-- 2월 17일 : 질문 기능에 마커 기능 추가 -->
 		<div class="card-text" th:text="${question.content}"></div>
@@ -44,8 +49,7 @@
 			 -->
 			<div class="my-3">
 				<!-- 2월 17일 : 추천 버튼 추가 -->
-				<a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"
-                	th:data-uri="@{|/question/vote/${question.id}|}">
+				<a th:href="@{|/question/vote/${question.id}|}" class="recommend btn btn-sm btn-outline-secondary">
                 	추천
                 	<span class="badge rounded-pill bg-success" th:text="${#lists.size(question.voter)}"></span>
             	</a>
@@ -112,8 +116,7 @@
 			<!--  답변의 수정 / 삭제 버튼  -->
 			<div class="my-3">
 				<!-- 2월 17일 : 답변의 추천 기능 추가  -->
-				<a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"
-                	th:data-uri="@{|/answer/vote/${answer.id}|}">
+				<a th:href="@{|/answer/vote/${answer.id}|}" class="recommend btn btn-sm btn-outline-secondary">
                 	추천
                 	<span class="badge rounded-pill bg-success" th:text="${#lists.size(answer.voter)}"></span>
             	</a>
@@ -123,7 +126,7 @@
                 	th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
                 	th:text="수정"></a>
                 	
-             	<a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"
+             	<a th:href="@{|/answer/delete/${answer.id}|}"
                 class="delete btn btn-sm btn-outline-secondary" sec:authorize="isAuthenticated()"
                 th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
                 th:text="삭제"></a>
@@ -154,6 +157,8 @@
 		
 		<input type="submit" value="답변등록" class="btn btn-primary my-2">
 	</form>
+	</div>
+	</main>
 </div>
 
 
@@ -164,9 +169,9 @@
 const recommend_elements = document.getElementsByClassName("recommend");
 Array.from(recommend_elements).forEach(function(element) {
     element.addEventListener('click', function() {
-        if(confirm("정말로 추천하시겠습니까?")) {
+        //if(confirm("정말로 추천하시겠습니까?")) {
             location.href = this.dataset.uri;
-        };
+        //};
     });
 });
 

@@ -33,6 +33,14 @@ public class MainController {
 			return "sub3";
 	}
 	
+	@GetMapping("/ggg")
+	public String wr() {
+			
+			return "write";
+	}
+	
+	
+	
 //	@GetMapping("/sub4")
 //	public String sub4() {
 //			

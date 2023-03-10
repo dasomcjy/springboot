@@ -735,6 +735,12 @@ main .sub3-12 .card {
   margin-bottom: 30px;
 }
 
+
+main .freewrite .scwrite {
+text-align: right;	
+padding-left: 500px;
+}
+
 main .subjoin {
   width : 500px;
   margin : 0 auto;
