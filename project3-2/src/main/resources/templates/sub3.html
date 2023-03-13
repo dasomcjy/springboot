@@ -47,6 +47,52 @@
         <a href ="">>>더보러가기</a>
       </div>
     </div>
+
+<div class="col-md-12">
+    <h1>영화 검색</h1>
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <input type="text" class ="form-control" id="keyword" placeholder="검색어를 입력하세요">
+                <button type="button" class="btn btn-primary" id="btn-movies-find">검색</button>
+            </div>
+    </div>
+</div>
+
   </main>
 </body>
+<script>
+
+	
+	
+	function book(){
+		
+		var xhttp,json;
+		
+		xhttp = new XMLHttpRequest();
+		jsons="" ;
+		
+		xttp.onreadystatechange = function() {
+			if(this.readyState==4 && this.status==200){
+				jsons= JSON.parse(xhttp.responseText);
+				console.log(jsons);
+				console.log();
+				innerHtmlString=""
+				
+				for(let i = 0 ; i <20 ; i++){
+					imgpath = "https://dapi.kakao.com/v3/search/book?target=title" + jsons.results[i].poster_path;
+				}
+				
+				document.getElementById('book').innerHTML=innerHTML=innerHtmlString;
+				console.log("통신성공");
+			}
+			
+		};
+		
+		xttp.open( "GET" , "https://dapi.kakao.com/v3/search/book?target=title_key=KakaoAK 3cd1ce23fe52aefc62a6152fd2180206" , true );
+		xttp.send();
+		
+	}
+
+</script>
 </html>
